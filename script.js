@@ -1,26 +1,34 @@
 const section = document.createElement('section');
 document.body.append(section);
 
-function multiDiv() {
-  let x = prompt('Enter a number') // Later make multiDiv(x)
-  let i = x * x;
-  while(i > 0) {
+const slider = document.createElement('input')
+slider.setAttribute('type', 'range');
+document.body.append(slider);
+
+slider.addEventListener('change', function() {
+  while( section.hasChildNodes() ) {
+      section.removeChild(section.firstChild);
+    }
+
+  let value = this.value;
+  let i = value * value;
+  
+  while (i > 0) {
     const divs = document.createElement('div');
     divs.className = 'divs';
-    divs.style.cssText = `border: 1px solid green;
-                          width: calc(100% / ${x});
-                          height: calc(100% / ${x});`;
-    section.append(divs);
-    i--;
-  }
-}
+    divs.style.cssText = `width: calc(100% / ${value});
+                          height: calc(100% / ${value});`;
+                          
+    divs.addEventListener('mousemove', () => {
+    divs.setAttribute('class', 'over')
+      
+       }
+     );
 
-multiDiv()
+  section.append(divs);
+  i--;
 
-// 1) Create with js variable that have
-// numeric value (or add to .divs data-attr)
-// 2) Create a function that get data-attrib
-// from .divs and modify it
-// 3) Implement modified data-attr in CSS for 
-// width: calc(100% / --data-attr)
-// height: calc(100% / --data-attr)
+      }
+    }
+  );
+
